@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+
+  backend:
+    build:
+      context: ./backend
+    depends_on:
+      database:
+        condition: service_healthy
+    tty: true
+    stdin_open: true
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=planet
+      - POSTGRES_HOST=database
+      - POSTGRES_PORT=5432
+    ports:
+      - 8080:5000
+
+  database:
+    image: postgis/postgis:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=planet
+    ports:
+      - 6660:5432
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      timeout: 20s
+      retries: 5
+
+  website:
+    build:
+      context: ./website
+    depends_on: [ backend ]
+    tty: true
+    stdin_open: true
+    ports:
+      - 3000:3000
