@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  font-family: Helvetica;
+  font-weight: 200;
+  font-size: 14px;
+  padding: 3%;
+}
+
+#main-container {
+  text-align: center;
+}
+
+#heatmap {
+  margin: auto;
+}
