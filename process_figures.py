@@ -4,7 +4,7 @@ from shapely.geometry import Polygon, MultiPolygon
 import ast
 import requests
 
-SERVER_URL = "http://localhost:8000"
+SERVER_URL = "http://localhost:8080"
 CREATE_FIGURES_URL = SERVER_URL + '/create_figures'
 
 df = pd.read_csv('raw_data.csv')
